@@ -1,0 +1,11 @@
+{
+  "record_id": "RECORD_ID",
+  "journal": "JOURNAL_NO",
+  "invoice": "INVOICE_NO",
+  "vendor": "VENDOR_NAME",
+  "account": "ACCOUNT_CODE",
+  "entry_date": "DATE",
+  "amount": "AMOUNT",
+  "entered_by": "USER",
+  "description": "DESCRIPTION"
+}

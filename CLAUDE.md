@@ -1,43 +1,61 @@
-# Audit Analysis for Claude Code: operating instructions
+# Audit Analysis for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+For the audit practitioner reviewing transaction populations. The operator supplies the engagement, currency, purpose, source controls and actual identity. All demo businesses and people are fictional.
 
-## Who this is for
+## Work rules
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Read the population controls before testing. Resolve ambiguous names from the candidate list. Never mix currencies. Use signed decimal amounts with two places, never floating point arithmetic for controls. Source dates are calendar dates, not timestamps.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+An exception is a lead for investigation, not proof of fraud. Sampling is seeded deterministic selection without replacement, not an assurance calculation. Journal balance testing applies only to a complete journal population, not a payables extract with just one side of each posting. Gap testing only examines numeric identifiers between observed endpoints.
 
-## How to work
+Every saved test requires a named preparer and purpose. Every review requires the actual reviewer, conclusion and evidence reference. Never act as another reviewer. CLI names are attribution, not login credentials. Read docs/compliance.md before interpreting controls. Store originals and backups under the firm's access and retention policies.
 
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
+## Recurring work
 
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Ask | Command |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| `/engagements` | List engagement owners, currencies, due dates and pending reviews |
+| `/populations` | List imported populations, independent totals and source fingerprints |
+| `/profile` | Check dates, amounts and row counts before testing |
+| `/duplicates` | Find repeated vendor, invoice and amount combinations |
+| `/gaps` | Show missing intervals in numeric record identifiers |
+| `/journals` | Find journal groups whose signed amounts do not balance |
+| `/weekend` | List entries dated Saturday or Sunday |
+| `/round-amounts` | List exact multiples at or above a chosen amount |
+| `/high-value` | List entries whose absolute amount meets a threshold |
+| `/missing-fields` | Find blank vendor, invoice, account or operator fields |
+| `/period-check` | Find entries outside the engagement dates |
+| `/sample` | Select a repeatable sample using a recorded seed |
+| `/vendor-summary` | Compare gross and net amounts by supplier |
+| `/account-summary` | Compare line counts and amounts by account |
+| `/controls` | Reconcile imported counts and totals to independent controls |
+| `/run-suite` | Save eight checks with their purpose, parameters and preparer |
+| `/runs` | List saved procedures and their due dates |
+| `/run` | Read a saved procedure, exact results and review history |
+| `/review` | Record a review conclusion and evidence reference |
+| `/reviews` | Read all recorded reviews |
+| `/compliance` | Check independent controls and overdue documentation review |
+| `/attention` | Find unreviewed procedures, oldest due first |
+| `/weekly-review` | Draft the Monday review from engagements, attention and compliance |
+| `/draft-evidence` | Draft a procedure record with results and review history |
+| `/add` | Add an engagement with its currency and reporting dates |
+| `/log` | Record a dated discussion or source-data note |
+| `/history` | Read engagement discussion notes |
+| `/import` | Import an IDEA Text Delimited CSV snapshot with explicit controls |
+| `/export` | Write a complete JSON backup without overwriting another file |
+| `/customise` | Change a field, test rule or house policy with a tested migration |
+| `/new-view` | Add a read-only branded report from existing records |
+| `/documents` | Render population reconciliations and test evidence packs |
+| `/views` | Render the week and overdue review dashboard |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+The CLI is `npm run audit -- <command> --json`. Run `npm run audit -- help` for verbs. Append --save, --actor, --purpose and --due to analytical tests to retain results. Never edit old evidence. Correct data with a new population and procedures with a new saved run. An unknown request requires inspecting the schema and implementing a tested change.
 
-## Hard rules
+## Boundaries
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+No messages, sends, public pages, customer writes, payments, record deletions or audit opinions. Draft into drafts/ and return files in chat. Read-only HTML is generated by npm run view and npm run docs. This is not an authenticated multi-user service. Never expose the database owner connection or reports publicly.
 
-## Where things live
+## Files
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Caseware IDEA.
+supabase/migrations holds append-only migrations. scripts/audit.mjs holds the CLI. scripts/lib/db.mjs selects PGlite or DATABASE_URL. views.json and documents.json hold read-only reports. brand.json controls their appearance. npm test uses a temporary embedded database by default. TEST_DATABASE_URL is only for a new disposable test database.
 
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/caseware-idea
+Built and optionally operated through Omni by Enterprise DNA.

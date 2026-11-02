@@ -1,11 +1,41 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "population-reconciliation",
+    "title": "Population reconciliation",
+    "for_each": "select id,name from populations order by name",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Source and controls",
+        "layout": "record",
+        "sql": "select * from population_controls where id=$1"
+      },
+      {
+        "title": "Test history",
+        "sql": "select id,test_name,prepared_by,purpose,engine_version,due_date,created_at from test_runs where population_id=$1 order by created_at,id"
+      }
+    ]
+  },
+  {
+    "name": "test-evidence",
+    "title": "Test evidence and review",
+    "for_each": "select id,test_name as name from test_runs order by created_at",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Test record",
+        "layout": "record",
+        "sql": "select id,test_name,purpose,parameters,prepared_by,created_at,engine_version,source_sha256,result_sha256 from test_runs where id=$1"
+      },
+      {
+        "title": "Results",
+        "note": "Exceptions are leads for investigation. This document is not an audit opinion.",
+        "sql": "select value as result from test_runs,jsonb_array_elements(results) where id=$1"
+      },
+      {
+        "title": "Review record",
+        "sql": "select reviewer,conclusion,evidence,created_at from reviews where run_id=$1 order by created_at,id"
+      }
     ]
   }
 ]

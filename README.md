@@ -1,115 +1,145 @@
-<h1 align="center">Audit Analysis for Claude Code</h1>
+# Audit Analysis for Claude Code
 
-<p align="center">
-  <strong>The open-source audit analysis system that is just a database and Claude Code.</strong>
-</p>
+Own your transaction tests and the evidence behind them. A database and coding agent for audit practitioners who want a focused alternative to Caseware IDEA.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+Built by **Enterprise DNA**. Free under MIT. Works with Claude Code, Codex, OpenCode or Cursor.
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Caseware IDEA data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=caseware-idea">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/caseware-idea?utm_source=github&utm_medium=readme&utm_campaign=caseware-idea">How it works</a></td>
-  </tr>
-</table>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free. Install the database and commands below. | Your fields, tests, documents and IDEA exports mapped across. | Installed, connected and operated through Omni by Enterprise DNA. Setup fee, then a retainer. |
+| [Quick start](#quick-start) | [Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=caseware-idea) | [Book a call](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=caseware-idea) |
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-caseware-idea">Instead of Caseware IDEA</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## What this covers
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
+Import a transaction population, reconcile it to source controls, run reproducible tests, investigate exceptions and record review. Each saved run keeps its exact results, source fingerprint, parameters, purpose, preparer and due date. Every source row is preserved. Correct an error by adding a new snapshot.
 
----
+The annual-bill research found five-figure institutional IDEA contracts, including a historical Australian maintenance reference. Current ANZ small-firm pricing is unverified and the vendor requests a sales conversation. [Research and scores](docs/research.md) distinguish procurement leads from verified prices. Nothing here implies a particular firm's savings.
 
-## What is this
-
-Audit Analysis for Claude Code does the job you pay Caseware IDEA for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Caseware IDEA dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Caseware IDEA per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=caseware-idea).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+IDEA has extensive analytics already. This is a smaller, inspectable base you own and extend. It does not convert IDEAScript or reproduce every IDEA function. [Scope and front-end limits](docs/why-no-front-end.md).
 
 ## Quick start
 
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Requires Node 20 or newer. No database service required.
 
 ```bash
 git clone https://github.com/Enterprise-DNA-OS/audit-analysis-for-claude-code.git
 cd audit-analysis-for-claude-code
 npm install
 npm run demo
+npm run audit -- duplicates --population="October payables"
+npm run audit -- journals --population="October journals"
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+The demo businesses and people are fictional. Start with `/attention`. The embedded PGlite database is stored in .data/db. For shared Postgres, set DATABASE_URL in your environment or local .env and run npm run migrate. Use a trusted server connection. No public access policies are created.
 
-### Use it with your own Postgres or Supabase
+## Save a procedure and review it
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+```bash
+npm run audit -- duplicates --population="October payables" --save --actor="Alex" --purpose="Check repeated invoices" --due=2026-12-01
+npm run audit -- runs
+npm run audit -- run <run-id>
+npm run audit -- review <run-id> --actor="Chris" --conclusion="Supplier confirmation required" --evidence="workpapers/confirmation-1"
+npm run audit -- draft-evidence <run-id>
+```
+
+Use the actual person's name. The second-person rule is firm policy, not a substitute for authentication. Reviews are append-only, so a correction adds a new dated review. Analytical runs are not audit opinions.
 
 ## The commands
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
-
 | Command | What it does |
 |---|---|
-| `/...` | ... |
+| `/engagements` | List engagement owners, currencies, due dates and pending reviews |
+| `/populations` | List imported populations, independent totals and source fingerprints |
+| `/profile` | Check dates, amounts and row counts before testing |
+| `/duplicates` | Find repeated vendor, invoice and amount combinations |
+| `/gaps` | Show missing intervals in numeric record identifiers |
+| `/journals` | Find journal groups whose signed amounts do not balance |
+| `/weekend` | List entries dated Saturday or Sunday |
+| `/round-amounts` | List exact multiples at or above a chosen amount |
+| `/high-value` | List entries whose absolute amount meets a threshold |
+| `/missing-fields` | Find blank vendor, invoice, account or operator fields |
+| `/period-check` | Find entries outside the engagement dates |
+| `/sample` | Select a repeatable sample using a recorded seed |
+| `/vendor-summary` | Compare gross and net amounts by supplier |
+| `/account-summary` | Compare line counts and amounts by account |
+| `/controls` | Reconcile imported counts and totals to independent controls |
+| `/run-suite` | Save eight checks with their purpose, parameters and preparer |
+| `/runs` | List saved procedures and their due dates |
+| `/run` | Read a saved procedure, exact results and review history |
+| `/review` | Record a review conclusion and evidence reference |
+| `/reviews` | Read all recorded reviews |
+| `/compliance` | Check independent controls and overdue documentation review |
+| `/attention` | Find unreviewed procedures, oldest due first |
+| `/weekly-review` | Draft the Monday review from engagements, attention and compliance |
+| `/draft-evidence` | Draft a procedure record with results and review history |
+| `/add` | Add an engagement with its currency and reporting dates |
+| `/log` | Record a dated discussion or source-data note |
+| `/history` | Read engagement discussion notes |
+| `/import` | Import an IDEA Text Delimited CSV snapshot with explicit controls |
+| `/export` | Write a complete JSON backup without overwriting another file |
+| `/customise` | Change a field, test rule or house policy with a tested migration |
+| `/new-view` | Add a read-only branded report from existing records |
+| `/documents` | Render population reconciliations and test evidence packs |
+| `/views` | Render the week and overdue review dashboard |
 
-## Instead of Caseware IDEA
+Every CLI read supports --json. Names match without case and identifiers match by prefix. Ambiguous matches list candidates and exit 1. Amounts use signed decimal units without separators. No currencies are combined. Export writes all records to a new JSON file and refuses overwrites.
 
-<!-- TODO(author): how to bring data across from Caseware IDEA; link docs/replace-caseware-idea.md -->
+## Ten questions to ask
+
+IDEA can be configured for these tests too. Each question below is answered by this base today.
+
+1. Which supplier invoice references repeat with the same amount? `duplicates`
+2. Which record numbers are missing between the first and last entry? `gaps`
+3. Which journal groups have a non-zero balance? `journals`
+4. Which entries were posted on a weekend? `weekend`
+5. Which entries are exact multiples of our chosen threshold? `round-amounts`
+6. Which entries exceed the amount we want to investigate? `high-value`
+7. Which entries have no supplier, invoice, account or operator? `missing-fields`
+8. Which entries fall outside the engagement period? `period-check`
+9. Can we select the same sample again from the same source? `sample`
+10. Which saved procedures are overdue for review and lack independent controls? `attention + compliance`
+
+## Your first hour: ten things to ask for
+
+1. Put our business name and logo in brand.json.
+2. Add our engagement dates, owner and currency.
+3. Map our IDEA export fields using examples/mapping.json.
+4. Test the import against independently obtained counts and totals.
+5. Compare a known duplicate test with its saved IDEA result.
+6. Check missing identifiers and out-of-period dates.
+7. Select a repeatable sample and save its seed.
+8. Draft the evidence pack for a reviewer.
+9. Add our own threshold rule through /customise.
+10. Draft the weekly review and export a backup.
+
+## Switch a population in one command
+
+```bash
+npm run audit -- import idea --engagement="Harbour Wholesale FY26" --file=examples/idea-transactions.csv --name="Imported example" --actor="Your name" --map=examples/mapping.json --expected-count=3 --expected-net=2000.50
+```
+
+Use --dry-run first with real data. This imports CSV transaction values, preserves raw columns and rejects a mismatched count or total. [The replacement guide](docs/replace-caseware-idea.md) covers IDEA's export, field mapping and what needs separate migration.
+
+## Documents and views
+
+npm run docs renders population reconciliation sheets and saved-test evidence packs under docs-out/. npm run view renders views/week.html with engagements, review queues and control totals. Both use brand.json and escape record values. Reports are local and read-only. `/new-view` adds another question without building a front end.
+
+## Test definitions and limits
+
+Duplicate keys are trimmed, case-insensitive supplier and invoice plus exact signed amount. This flags candidates, not duplicate payments. Gaps report numeric intervals between observed endpoints, not missing records outside the range. Journal imbalance needs the complete debit and credit population. Weekend dates follow ISO Saturday and Sunday. Round amounts are exact multiples of a positive threshold. High value uses absolute signed amounts. Missing fields checks vendor, invoice, account and operator. Period checks use inclusive engagement boundaries. Samples rank SHA-256 of seed, source fingerprint and row number, without replacement; no statistical confidence is calculated.
+
+A population fingerprint identifies the source bytes. The result fingerprint uses canonical JSON with sorted object keys. It detects accidental differences, not privileged database tampering. Raw files should be retained separately. No tax decisions, accounting changes, payments or messages are made.
+
+## Compliance and validation
+
+[Documentation controls](docs/compliance.md) cite NZ and Australian audit documentation standards and distinguish firm policy from legal requirements. The tool tracks evidence and review, not professional judgment.
+
+npm test creates a temporary database, applies migrations twice, seeds twice and checks expected exception records, sampling, immutable history, review identity, atomic import rejection, controls, idempotency, ambiguous matches, draft output and HTML escaping. The workflow runs Node 20/22 on Windows and Linux, plus PostgreSQL 17. Test results from this build are recorded separately in docs/validation.md.
 
 ## Architecture
 
-```
-audit-analysis-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
+Plain Postgres schema under supabase/migrations. One database adapter, one CLI under scripts/audit.mjs, one recipe per recurring job under .claude/commands. No application server and no public endpoints. Local agent access is trusted. A shared deployment needs access and backup policies.
 
-## Built for coding agents
-
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
-
-## Contributing
-
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
-
-## Want it installed and run for you?
-
-Enterprise DNA installs Audit Analysis for Claude Code for your business, migrates your Caseware IDEA data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
-
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=caseware-idea)
-- Read more: [enterprisedna.co/omni/instead-of/caseware-idea](https://enterprisedna.co/omni/instead-of/caseware-idea?utm_source=github&utm_medium=readme&utm_campaign=caseware-idea)
-
-## License
-
-MIT. Copyright (c) 2026 Enterprise DNA.
+MIT, copyright 2026 Enterprise DNA. Built and run for businesses through [Omni by Enterprise DNA](https://enterprisedna.co/omni/instead-of/caseware-idea).

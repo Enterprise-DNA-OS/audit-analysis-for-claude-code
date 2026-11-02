@@ -1,0 +1,12 @@
+[
+  "Which supplier invoice references repeat with the same amount?",
+  "Which record numbers are missing between the first and last entry?",
+  "Which journal groups have a non-zero balance?",
+  "Which entries were posted on a weekend?",
+  "Which entries are exact multiples of our chosen threshold?",
+  "Which entries exceed the amount we want to investigate?",
+  "Which entries have no supplier, invoice, account or operator?",
+  "Which entries fall outside the engagement period?",
+  "Can we select the same sample again from the same source?",
+  "Which saved procedures are overdue for review and lack independent controls?"
+]
