@@ -1,3 +1,7 @@
+---
+description: "Find blank vendor, invoice, account or operator fields."
+---
+
 # missing-fields
 
 Find blank vendor, invoice, account or operator fields.

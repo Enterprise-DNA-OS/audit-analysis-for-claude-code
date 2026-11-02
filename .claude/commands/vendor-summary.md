@@ -1,3 +1,7 @@
+---
+description: "Compare gross and net amounts by supplier."
+---
+
 # vendor-summary
 
 Compare gross and net amounts by supplier.

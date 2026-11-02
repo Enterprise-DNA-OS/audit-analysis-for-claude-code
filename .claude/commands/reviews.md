@@ -1,3 +1,7 @@
+---
+description: "Read all recorded reviews."
+---
+
 # reviews
 
 Read all recorded reviews.

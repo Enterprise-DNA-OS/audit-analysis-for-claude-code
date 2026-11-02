@@ -1,3 +1,7 @@
+---
+description: "Record a dated discussion or source-data note."
+---
+
 # log
 
 Record a dated discussion or source-data note.

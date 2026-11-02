@@ -1,3 +1,7 @@
+---
+description: "List entries dated Saturday or Sunday."
+---
+
 # weekend
 
 List entries dated Saturday or Sunday.

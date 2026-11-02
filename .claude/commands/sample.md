@@ -1,3 +1,7 @@
+---
+description: "Select a repeatable sample using a recorded seed."
+---
+
 # sample
 
 Select a repeatable sample using a recorded seed.

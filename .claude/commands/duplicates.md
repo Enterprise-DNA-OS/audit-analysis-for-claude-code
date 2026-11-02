@@ -1,3 +1,7 @@
+---
+description: "Find repeated vendor, invoice and amount combinations."
+---
+
 # duplicates
 
 Find repeated vendor, invoice and amount combinations.

@@ -1,3 +1,7 @@
+---
+description: "Show missing intervals in numeric record identifiers."
+---
+
 # gaps
 
 Show missing intervals in numeric record identifiers.

@@ -1,3 +1,7 @@
+---
+description: "Draft the Monday review from engagements, attention and compliance."
+---
+
 # weekly-review
 
 Draft the Monday review from engagements, attention and compliance.

@@ -1,3 +1,7 @@
+---
+description: "Compare line counts and amounts by account."
+---
+
 # account-summary
 
 Compare line counts and amounts by account.

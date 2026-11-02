@@ -1,3 +1,7 @@
+---
+description: "Find entries outside the engagement dates."
+---
+
 # period-check
 
 Find entries outside the engagement dates.

@@ -1,3 +1,7 @@
+---
+description: "Import an IDEA Text Delimited CSV snapshot with explicit controls."
+---
+
 # import
 
 Import an IDEA Text Delimited CSV snapshot with explicit controls.

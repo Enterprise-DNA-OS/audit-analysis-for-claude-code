@@ -1,3 +1,7 @@
+---
+description: "Write a complete JSON backup without overwriting another file."
+---
+
 # export
 
 Write a complete JSON backup without overwriting another file.

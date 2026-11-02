@@ -1,3 +1,7 @@
+---
+description: "Check dates, amounts and row counts before testing."
+---
+
 # profile
 
 Check dates, amounts and row counts before testing.

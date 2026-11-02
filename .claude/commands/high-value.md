@@ -1,3 +1,7 @@
+---
+description: "List entries whose absolute amount meets a threshold."
+---
+
 # high-value
 
 List entries whose absolute amount meets a threshold.

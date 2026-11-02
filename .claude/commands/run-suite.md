@@ -1,3 +1,7 @@
+---
+description: "Save eight checks with their purpose, parameters and preparer."
+---
+
 # run-suite
 
 Save eight checks with their purpose, parameters and preparer.

@@ -1,3 +1,7 @@
+---
+description: "Find journal groups whose signed amounts do not balance."
+---
+
 # journals
 
 Find journal groups whose signed amounts do not balance.

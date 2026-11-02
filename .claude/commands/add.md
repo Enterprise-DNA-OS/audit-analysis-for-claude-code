@@ -1,3 +1,7 @@
+---
+description: "Add an engagement with its currency and reporting dates."
+---
+
 # add
 
 Add an engagement with its currency and reporting dates.
