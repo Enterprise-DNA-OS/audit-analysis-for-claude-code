@@ -142,4 +142,4 @@ npm test creates a temporary database, applies migrations twice, seeds twice and
 
 Plain Postgres schema under supabase/migrations. One database adapter, one CLI under scripts/audit.mjs, one recipe per recurring job under .claude/commands. No application server and no public endpoints. Local agent access is trusted. A shared deployment needs access and backup policies.
 
-MIT, copyright 2026 Enterprise DNA. Built and run for businesses through [Omni by Enterprise DNA](https://enterprisedna.co/omni/instead-of/caseware-idea).
+MIT, copyright 2026 Enterprise DNA. Built and run for businesses through [Omni by Enterprise DNA](https://enterprisedna.co/omni/instead-of/caseware-idea?utm_source=github&utm_medium=readme&utm_campaign=caseware-idea).
